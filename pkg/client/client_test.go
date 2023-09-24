@@ -51,7 +51,7 @@ func init() {
 
 // TestLogin
 func TestLogin(t *testing.T) {
-	if err := client.Login(os.Getenv("username"), os.Getenv("password")); err != nil {
+	if err := client.Login(os.Getenv("PCLOUD_USER"), os.Getenv("PCLOUD_PASSWORD")); err != nil {
 		t.Fatal("can't login", err)
 	}
 }
