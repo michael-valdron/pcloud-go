@@ -1,4 +1,4 @@
-package pcloud
+package client
 
 import "net/http"
 

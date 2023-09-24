@@ -1,4 +1,4 @@
-package pcloud
+package client
 
 import (
 	"encoding/json"
@@ -6,6 +6,8 @@ import (
 	"fmt"
 	"net/url"
 	"strconv"
+
+	"github.com/yanmhlv/pcloud/pkg/util"
 )
 
 // getvideolink
@@ -44,7 +46,7 @@ func (c *pCloudClient) GetFileLink(fileID int, path string, forceDownload int, c
 		values.Add("skipfilename", strconv.Itoa(skipFilename))
 	}
 
-	resp, err := c.Client.Get(urlBuilder("getfilelink", values))
+	resp, err := c.Client.Get(util.UrlBuilder("getfilelink", values))
 	if err != nil {
 		return links, err
 	}

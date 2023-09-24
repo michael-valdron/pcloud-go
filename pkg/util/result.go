@@ -1,4 +1,4 @@
-package pcloud
+package util
 
 import (
 	"bytes"
@@ -8,7 +8,7 @@ import (
 )
 
 // convertToBuffer; convert http.Response.Body to bytes.Buffer
-func convertToBuffer(resp *http.Response, err error) (*bytes.Buffer, error) {
+func ConvertToBuffer(resp *http.Response, err error) (*bytes.Buffer, error) {
 	if err != nil {
 		return nil, err
 	}
@@ -21,8 +21,8 @@ func convertToBuffer(resp *http.Response, err error) (*bytes.Buffer, error) {
 }
 
 // checkResult; returned error if request is failed or server returned error
-func checkResult(resp *http.Response, err error) error {
-	buf, err := convertToBuffer(resp, err)
+func CheckResult(resp *http.Response, err error) error {
+	buf, err := ConvertToBuffer(resp, err)
 	if err != nil {
 		return err
 	}

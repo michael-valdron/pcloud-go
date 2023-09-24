@@ -1,9 +1,11 @@
-package pcloud
+package client
 
 import (
 	"encoding/json"
 	"errors"
 	"net/url"
+
+	"github.com/yanmhlv/pcloud/pkg/util"
 )
 
 // Login client; https://docs.pcloud.com/methods/intro/authentication.html
@@ -14,7 +16,7 @@ func (c *pCloudClient) Login(username string, password string) error {
 		"password": {password},
 	}
 
-	buf, err := convertToBuffer(c.Client.Get(urlBuilder("userinfo", values)))
+	buf, err := util.ConvertToBuffer(c.Client.Get(util.UrlBuilder("userinfo", values)))
 	if err != nil {
 		return err
 	}
@@ -43,7 +45,7 @@ func (c *pCloudClient) Logout() error {
 		"auth": {*c.Auth},
 	}
 
-	if err := checkResult(c.Client.Get(urlBuilder("logout", values))); err != nil {
+	if err := util.CheckResult(c.Client.Get(util.UrlBuilder("logout", values))); err != nil {
 		return err
 	}
 

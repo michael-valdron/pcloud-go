@@ -1,9 +1,11 @@
-package pcloud
+package client
 
 import (
 	"errors"
 	"net/url"
 	"strconv"
+
+	"github.com/yanmhlv/pcloud/pkg/util"
 )
 
 // CreateFolder; https://docs.pcloud.com/methods/folder/createfolder.html
@@ -22,7 +24,7 @@ func (c *pCloudClient) CreateFolder(path string, folderID int, name string) erro
 		return errors.New("bad params")
 	}
 
-	return checkResult(c.Client.Get(urlBuilder("createfolder", values)))
+	return util.CheckResult(c.Client.Get(util.UrlBuilder("createfolder", values)))
 }
 
 // func (c *pCloudClient) ListFolder() error {
@@ -51,7 +53,7 @@ func (c *pCloudClient) RenameFolder(folderID int, path string, topath string) er
 		return errors.New("bad params")
 	}
 
-	return checkResult(c.Client.Get(urlBuilder("renamefolder", values)))
+	return util.CheckResult(c.Client.Get(util.UrlBuilder("renamefolder", values)))
 }
 
 // DeleteFolder; https://docs.pcloud.com/methods/folder/deletefolder.html
@@ -69,7 +71,7 @@ func (c *pCloudClient) DeleteFolder(path string, folderID int) error {
 		return errors.New("bad params")
 	}
 
-	return checkResult(c.Client.Get(urlBuilder("deletefolder", values)))
+	return util.CheckResult(c.Client.Get(util.UrlBuilder("deletefolder", values)))
 }
 
 // DeleteFolderRecursive; https://docs.pcloud.com/methods/folder/deletefolderrecursive.html
@@ -87,5 +89,5 @@ func (c *pCloudClient) DeleteFolderRecursive(path string, folderID int) error {
 		return errors.New("bad params")
 	}
 
-	return checkResult(c.Client.Get(urlBuilder("deletefolderrecursive", values)))
+	return util.CheckResult(c.Client.Get(util.UrlBuilder("deletefolderrecursive", values)))
 }

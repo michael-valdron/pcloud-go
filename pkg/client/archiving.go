@@ -1,4 +1,4 @@
-package pcloud
+package client
 
 import (
 	"encoding/json"
@@ -7,6 +7,8 @@ import (
 	"io"
 	"net/url"
 	"strconv"
+
+	"github.com/yanmhlv/pcloud/pkg/util"
 )
 
 // savezip
@@ -30,13 +32,13 @@ func (c *pCloudClient) GetZip(forceDownload int, filename string, timeOffset str
 		values.Add("timeoffset", timeOffset)
 	}
 
-	resp, err := c.Client.Get(urlBuilder("getzip", values))
+	resp, err := c.Client.Get(util.UrlBuilder("getzip", values))
 	if err != nil {
 		return nil, err
 	}
 	defer resp.Body.Close()
 	if resp.StatusCode != 200 {
-		return nil, checkResult(resp, err)
+		return nil, util.CheckResult(resp, err)
 	}
 
 	return resp.Body, nil
@@ -63,7 +65,7 @@ func (c *pCloudClient) GetZipLink(maxspeed int, forceDownload int, filename stri
 		values.Add("timeoffset", timeOffset)
 	}
 
-	resp, err := c.Client.Get(urlBuilder("getziplink", values))
+	resp, err := c.Client.Get(util.UrlBuilder("getziplink", values))
 	if err != nil {
 		return links, err
 	}

@@ -1,4 +1,4 @@
-package pcloud
+package client
 
 import (
 	"bytes"
@@ -8,6 +8,8 @@ import (
 	"net/http"
 	"net/url"
 	"strconv"
+
+	"github.com/yanmhlv/pcloud/pkg/util"
 )
 
 // uploadprogress
@@ -32,7 +34,7 @@ func (c *pCloudClient) DownloadFile(urlStr string, path string, folderid int, ta
 		values.Add("target", target)
 	}
 
-	return checkResult(c.Client.Get(urlBuilder("downloadfile", values)))
+	return util.CheckResult(c.Client.Get(util.UrlBuilder("downloadfile", values)))
 }
 
 // UploadFile; https://docs.pcloud.com/methods/file/uploadfile.html
@@ -77,13 +79,13 @@ func (c *pCloudClient) UploadFile(reader io.Reader, path string, folderID int, f
 		return err
 	}
 
-	req, err := http.NewRequest("POST", urlBuilder("uploadfile", values), &b)
+	req, err := http.NewRequest("POST", util.UrlBuilder("uploadfile", values), &b)
 	if err != nil {
 		return err
 	}
 	req.Header.Set("Content-Type", w.FormDataContentType())
 
-	return checkResult(c.Client.Do(req))
+	return util.CheckResult(c.Client.Do(req))
 }
 
 // CopyFile; https://docs.pcloud.com/methods/file/copyfile.html
@@ -111,7 +113,7 @@ func (c *pCloudClient) CopyFile(fileID int, path string, toFolderID int, toName 
 		return errors.New("bad params")
 	}
 
-	return checkResult(c.Client.Get(urlBuilder("copyfile", values)))
+	return util.CheckResult(c.Client.Get(util.UrlBuilder("copyfile", values)))
 }
 
 // DeleteFile; https://docs.pcloud.com/methods/file/deletefile.html
@@ -129,7 +131,7 @@ func (c *pCloudClient) DeleteFile(fileID int, path string) error {
 		return errors.New("bad params")
 	}
 
-	return checkResult(c.Client.Get(urlBuilder("deletefile", values)))
+	return util.CheckResult(c.Client.Get(util.UrlBuilder("deletefile", values)))
 }
 
 // RenameFile; https://docs.pcloud.com/methods/file/renamefile.html
@@ -157,5 +159,5 @@ func (c *pCloudClient) RenameFile(fileID int, path string, toPath string, toFold
 		return errors.New("bad params")
 	}
 
-	return checkResult(c.Client.Get(urlBuilder("renamefile", values)))
+	return util.CheckResult(c.Client.Get(util.UrlBuilder("renamefile", values)))
 }

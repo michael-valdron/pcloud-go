@@ -1,9 +1,9 @@
-package pcloud
+package util
 
 import "net/url"
 
 // urlBuilder; return url with GET-params
-func urlBuilder(method string, values url.Values) string {
+func UrlBuilder(method string, values url.Values) string {
 	const (
 		apiScheme = "https"
 		apiHost   = "api.pcloud.com"
