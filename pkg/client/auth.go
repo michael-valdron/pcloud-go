@@ -8,6 +8,16 @@ import (
 	"github.com/yanmhlv/pcloud/pkg/util"
 )
 
+type AuthResult struct {
+	Result
+	Auth string `json:"auth"`
+}
+
+// SetToken client; https://docs.pcloud.com/methods/intro/authentication.html
+func (c *pCloudClient) SetToken(tokenStr string) {
+	c.Auth = &tokenStr
+}
+
 // Login client; https://docs.pcloud.com/methods/intro/authentication.html
 func (c *pCloudClient) Login(username string, password string) error {
 	values := url.Values{
@@ -21,21 +31,17 @@ func (c *pCloudClient) Login(username string, password string) error {
 		return err
 	}
 
-	result := struct {
-		Auth   string `json:"auth"`
-		Result int    `json:"result"`
-		Error  string `json:"error"`
-	}{}
+	result := AuthResult{}
 
 	if err := json.Unmarshal(buf.Bytes(), &result); err != nil {
 		return err
 	}
 
-	if result.Result != 0 {
+	if result.Result.Result != 0 {
 		return errors.New(result.Error)
 	}
 
-	c.Auth = &result.Auth
+	c.SetToken(result.Auth)
 	return nil
 }
 
