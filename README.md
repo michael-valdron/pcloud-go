@@ -2,7 +2,7 @@
 
 A golang wrapper api for [pcloud REST API](https://docs.pcloud.com/).
 
-## Requirements
+## Prerequisites
 
 - Go 1.19
 
