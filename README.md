@@ -1,4 +1,39 @@
-# https://docs.pcloud.com
+# pcloud
+
+A golang wrapper api for [pcloud REST API](https://docs.pcloud.com/).
+
+## Requirements
+
+- Go 1.19
+
+## Install
+
+To include this module within your Go project run:
+
+```
+go get github.com/yanmhlv/pcloud@latest
+```
+
+## Testing
+
+To perform testing, you will to first set the environment variables
+`PCLOUD_USER` and `PCLOUD_PASSWORD` to provide your username and 
+password to the test suite. 
+
+**Note:** It is recommended to not use your personal/professional 
+pCloud account, use one specifically intended for testing or development.
+
+The above environment variables can be set and the test suite can be 
+run by executing the following:
+
+```sh
+export PCLOUD_USER=<your_pcloud_username> 
+export PCLOUD_PASSWORD=<you_pcloud_password>
+go test ./...
+```
+
+## Example
+### https://docs.pcloud.com
 
 ```bash
 username=myusername password=mypassword go test github.com/yanmhlv/pcloud
@@ -11,7 +46,7 @@ import (
     "fmt"
     "os"
 
-    "github.com/yanmhlv/pcloud"
+    pcloud "github.com/yanmhlv/pcloud/client"
 )
 
 func main() {
