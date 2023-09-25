@@ -34,7 +34,7 @@ func (c *pCloudClient) DownloadFile(urlStr string, path string, folderid int, ta
 		values.Add("target", target)
 	}
 
-	return util.CheckResult(c.Client.Get(util.UrlBuilder("downloadfile", values)))
+	return CheckResult(c.Client.Get(util.UrlBuilder("downloadfile", values)))
 }
 
 // UploadFile; https://docs.pcloud.com/methods/file/uploadfile.html
@@ -85,7 +85,7 @@ func (c *pCloudClient) UploadFile(reader io.Reader, path string, folderID int, f
 	}
 	req.Header.Set("Content-Type", w.FormDataContentType())
 
-	return util.CheckResult(c.Client.Do(req))
+	return CheckResult(c.Client.Do(req))
 }
 
 // CopyFile; https://docs.pcloud.com/methods/file/copyfile.html
@@ -113,7 +113,7 @@ func (c *pCloudClient) CopyFile(fileID int, path string, toFolderID int, toName 
 		return errors.New("bad params")
 	}
 
-	return util.CheckResult(c.Client.Get(util.UrlBuilder("copyfile", values)))
+	return CheckResult(c.Client.Get(util.UrlBuilder("copyfile", values)))
 }
 
 // DeleteFile; https://docs.pcloud.com/methods/file/deletefile.html
@@ -131,7 +131,7 @@ func (c *pCloudClient) DeleteFile(fileID int, path string) error {
 		return errors.New("bad params")
 	}
 
-	return util.CheckResult(c.Client.Get(util.UrlBuilder("deletefile", values)))
+	return CheckResult(c.Client.Get(util.UrlBuilder("deletefile", values)))
 }
 
 // RenameFile; https://docs.pcloud.com/methods/file/renamefile.html
@@ -159,5 +159,5 @@ func (c *pCloudClient) RenameFile(fileID int, path string, toPath string, toFold
 		return errors.New("bad params")
 	}
 
-	return util.CheckResult(c.Client.Get(util.UrlBuilder("renamefile", values)))
+	return CheckResult(c.Client.Get(util.UrlBuilder("renamefile", values)))
 }

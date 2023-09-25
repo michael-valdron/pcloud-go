@@ -1,4 +1,4 @@
-package util
+package client
 
 import (
 	"bytes"
@@ -7,7 +7,12 @@ import (
 	"net/http"
 )
 
-// convertToBuffer; convert http.Response.Body to bytes.Buffer
+type Result struct {
+	Result int    `json:"result"`
+	Error  string `json:"error"`
+}
+
+// ConvertToBuffer; convert http.Response.Body to bytes.Buffer
 func ConvertToBuffer(resp *http.Response, err error) (*bytes.Buffer, error) {
 	if err != nil {
 		return nil, err
@@ -20,17 +25,14 @@ func ConvertToBuffer(resp *http.Response, err error) (*bytes.Buffer, error) {
 	return buf, err
 }
 
-// checkResult; returned error if request is failed or server returned error
+// CheckResult; returned error if request is failed or server returned error
 func CheckResult(resp *http.Response, err error) error {
 	buf, err := ConvertToBuffer(resp, err)
 	if err != nil {
 		return err
 	}
 
-	result := struct {
-		Result int    `json:"result"`
-		Error  string `json:"error"`
-	}{}
+	result := Result{}
 
 	if err := json.Unmarshal(buf.Bytes(), &result); err != nil {
 		return err

@@ -38,7 +38,7 @@ func (c *pCloudClient) GetZip(forceDownload int, filename string, timeOffset str
 	}
 	defer resp.Body.Close()
 	if resp.StatusCode != 200 {
-		return nil, util.CheckResult(resp, err)
+		return nil, CheckResult(resp, err)
 	}
 
 	return resp.Body, nil

@@ -16,7 +16,7 @@ func (c *pCloudClient) Login(username string, password string) error {
 		"password": {password},
 	}
 
-	buf, err := util.ConvertToBuffer(c.Client.Get(util.UrlBuilder("userinfo", values)))
+	buf, err := ConvertToBuffer(c.Client.Get(util.UrlBuilder("userinfo", values)))
 	if err != nil {
 		return err
 	}
@@ -45,7 +45,7 @@ func (c *pCloudClient) Logout() error {
 		"auth": {*c.Auth},
 	}
 
-	if err := util.CheckResult(c.Client.Get(util.UrlBuilder("logout", values))); err != nil {
+	if err := CheckResult(c.Client.Get(util.UrlBuilder("logout", values))); err != nil {
 		return err
 	}
 
