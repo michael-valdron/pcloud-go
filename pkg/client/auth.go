@@ -14,12 +14,12 @@ type AuthResult struct {
 }
 
 // SetToken client; https://docs.pcloud.com/methods/intro/authentication.html
-func (c *pCloudClient) SetToken(tokenStr string) {
+func (c *Client) SetToken(tokenStr string) {
 	c.Auth = &tokenStr
 }
 
 // Login client; https://docs.pcloud.com/methods/intro/authentication.html
-func (c *pCloudClient) Login(username string, password string) error {
+func (c *Client) Login(username string, password string) error {
 	values := url.Values{
 		"getauth":  {"1"},
 		"username": {username},
@@ -46,7 +46,7 @@ func (c *pCloudClient) Login(username string, password string) error {
 }
 
 // Logout client; https://docs.pcloud.com/methods/auth/logout.html
-func (c *pCloudClient) Logout() error {
+func (c *Client) Logout() error {
 	values := url.Values{
 		"auth": {*c.Auth},
 	}

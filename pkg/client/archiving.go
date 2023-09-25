@@ -17,7 +17,7 @@ import (
 // savezipprogress
 
 // GetZip; https://docs.pcloud.com/methods/archiving/getzip.html
-func (c *pCloudClient) GetZip(forceDownload int, filename string, timeOffset string) (io.Reader, error) {
+func (c *Client) GetZip(forceDownload int, filename string, timeOffset string) (io.Reader, error) {
 	values := url.Values{
 		"auth": {*c.Auth},
 	}
@@ -45,7 +45,7 @@ func (c *pCloudClient) GetZip(forceDownload int, filename string, timeOffset str
 }
 
 // GetZipLink; https://docs.pcloud.com/methods/archiving/getziplink.html
-func (c *pCloudClient) GetZipLink(maxspeed int, forceDownload int, filename string, timeOffset string) ([]string, error) {
+func (c *Client) GetZipLink(maxspeed int, forceDownload int, filename string, timeOffset string) ([]string, error) {
 	var links []string
 
 	values := url.Values{

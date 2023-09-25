@@ -17,7 +17,7 @@ import (
 // checksumfile
 
 // DownloadFile; https://docs.pcloud.com/methods/file/downloadfile.html
-func (c *pCloudClient) DownloadFile(urlStr string, path string, folderid int, target string) error {
+func (c *Client) DownloadFile(urlStr string, path string, folderid int, target string) error {
 	values := url.Values{
 		"url":  {urlStr},
 		"auth": {*c.Auth},
@@ -38,7 +38,7 @@ func (c *pCloudClient) DownloadFile(urlStr string, path string, folderid int, ta
 }
 
 // UploadFile; https://docs.pcloud.com/methods/file/uploadfile.html
-func (c *pCloudClient) UploadFile(reader io.Reader, path string, folderID int, filename string, noPartial int, progressHash string, renameIfExists int) error {
+func (c *Client) UploadFile(reader io.Reader, path string, folderID int, filename string, noPartial int, progressHash string, renameIfExists int) error {
 	var b bytes.Buffer
 	w := multipart.NewWriter(&b)
 	values := url.Values{
@@ -89,7 +89,7 @@ func (c *pCloudClient) UploadFile(reader io.Reader, path string, folderID int, f
 }
 
 // CopyFile; https://docs.pcloud.com/methods/file/copyfile.html
-func (c *pCloudClient) CopyFile(fileID int, path string, toFolderID int, toName string, toPath string) error {
+func (c *Client) CopyFile(fileID int, path string, toFolderID int, toName string, toPath string) error {
 	values := url.Values{
 		"auth": {*c.Auth},
 	}
@@ -117,7 +117,7 @@ func (c *pCloudClient) CopyFile(fileID int, path string, toFolderID int, toName 
 }
 
 // DeleteFile; https://docs.pcloud.com/methods/file/deletefile.html
-func (c *pCloudClient) DeleteFile(fileID int, path string) error {
+func (c *Client) DeleteFile(fileID int, path string) error {
 	values := url.Values{
 		"auth": {*c.Auth},
 	}
@@ -135,7 +135,7 @@ func (c *pCloudClient) DeleteFile(fileID int, path string) error {
 }
 
 // RenameFile; https://docs.pcloud.com/methods/file/renamefile.html
-func (c *pCloudClient) RenameFile(fileID int, path string, toPath string, toFolderID int, toName string) error {
+func (c *Client) RenameFile(fileID int, path string, toPath string, toFolderID int, toName string) error {
 	values := url.Values{
 		"auth": {*c.Auth},
 	}

@@ -21,7 +21,7 @@ func randomString(size int) string {
 	return result
 }
 
-var client *pCloudClient
+var client *Client
 
 var (
 	folderByPath         string

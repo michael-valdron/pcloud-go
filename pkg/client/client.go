@@ -2,14 +2,14 @@ package client
 
 import "net/http"
 
-type pCloudClient struct {
+type Client struct {
 	Auth   *string
 	Client *http.Client
 }
 
 // NewClient create new pCloudClient
-func NewClient() *pCloudClient {
-	return &pCloudClient{
+func NewClient() *Client {
+	return &Client{
 		Auth:   nil,
 		Client: &http.Client{},
 	}

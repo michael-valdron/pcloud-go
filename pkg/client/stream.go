@@ -17,7 +17,7 @@ import (
 // gettextfile
 
 // GetFileLink; https://docs.pcloud.com/methods/streaming/getfilelink.html
-func (c *pCloudClient) GetFileLink(fileID int, path string, forceDownload int, contentType string, maxSpeed int, skipFilename int) ([]string, error) {
+func (c *Client) GetFileLink(fileID int, path string, forceDownload int, contentType string, maxSpeed int, skipFilename int) ([]string, error) {
 	var links []string
 
 	values := url.Values{
